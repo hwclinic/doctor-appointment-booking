@@ -265,7 +265,7 @@ export async function generateSlots(request, env) {
   }
 
   const body = await request.json().catch(() => ({}));
-  const days = Math.min(Math.max(Number(body?.days) || 30, 1), 90); // sensible bounds
+  const days = Math.min(Math.max(Number(body?.days) || 15, 1), 90); // sensible bounds
 
   const { results: templateRows } = await env.DB.prepare(
     "SELECT day_of_week, start_time, end_time, slot_duration_minutes FROM weekly_schedule"
