@@ -8,4 +8,4 @@
    Nothing else in the front-end needs to change.
    ========================================================================== */
 
-const API_BASE_URL = "http://127.0.0.1:8787";
+const API_BASE_URL = "https://doctor-appointment-booking-api.hwclinic.workers.dev";
