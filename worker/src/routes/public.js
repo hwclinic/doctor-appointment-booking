@@ -62,6 +62,21 @@ export async function getAvailability(request, env) {
   return jsonResponse({ date, slots }, env);
 }
 
+/** GET /api/available-dates — returns future dates that have available slots. */
+export async function getAvailableDates(env) {
+  const { results } = await env.DB.prepare(
+    `SELECT DISTINCT date
+     FROM appointments
+     WHERE date >= date('now')
+       AND status = 'AVAILABLE'
+     ORDER BY date
+     LIMIT 30`
+  ).all();
+
+  const dates = results.map((row) => row.date);
+  return jsonResponse({ dates }, env);
+}
+
 /** POST /api/book — creates a booking, re-checking availability on the server. */
 export async function createBooking(request, env) {
   const body = await request.json().catch(() => null);

@@ -12,7 +12,7 @@ let selectedSlot = null;
 // A handful of demo dates for the beginner-friendly date dropdown.
 // (Later this could be replaced by a real date picker covering, say, the
 // next 14 days — kept simple for now.)
-const DEMO_DATES = ["2026-09-18", "2026-09-19", "2026-09-20"];
+
 
 async function loadSettings() {
   const response = await fetch(`${API_BASE_URL}/api/settings`);
@@ -32,15 +32,41 @@ async function loadSettings() {
   }
 }
 
-function populateDateOptions() {
+async function populateDateOptions() {
   const dateSelect = document.getElementById("date-select");
-  DEMO_DATES.forEach((date) => {
-    const option = document.createElement("option");
-    option.value = date;
-    option.textContent = date;
-    dateSelect.appendChild(option);
-  });
+
+  dateSelect.innerHTML = '<option value="">Loading available dates...</option>';
+  dateSelect.disabled = true;
+
+  try {
+    const response = await fetch(`${API_BASE_URL}/api/available-dates`);
+
+    if (!response.ok) {
+      throw new Error("Could not load available dates");
+    }
+
+    const data = await response.json();
+
+    dateSelect.innerHTML = '<option value="">Choose a date</option>';
+
+    data.dates.forEach((date) => {
+      const option = document.createElement("option");
+      option.value = date;
+      option.textContent = date;
+      dateSelect.appendChild(option);
+    });
+
+    if (data.dates.length === 0) {
+      dateSelect.innerHTML = '<option value="">No available dates</option>';
+    }
+
+    dateSelect.disabled = false;
+  } catch (error) {
+    console.error("Failed to load available dates:", error);
+    dateSelect.innerHTML = '<option value="">Could not load dates</option>';
+  }
 }
+
 
 async function renderSlots(date) {
   const slotList = document.getElementById("slot-list");

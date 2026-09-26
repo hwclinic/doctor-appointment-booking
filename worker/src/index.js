@@ -38,6 +38,11 @@ export default {
         return publicRoutes.getAvailability(request, env);
       }
 
+      if (pathname === "/api/available-dates" && method === "GET") {
+        return publicRoutes.getAvailableDates(env);
+      }
+
+
       if (pathname === "/api/book" && method === "POST") {
         return publicRoutes.createBooking(request, env);
       }
