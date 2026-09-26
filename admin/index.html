@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Doctor Login — Admin</title>
+  <link rel="stylesheet" href="../css/styles.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <span class="site-title">Clinic Admin</span>
+    </div>
+  </header>
+
+  <main class="container">
+    <section>
+      <h1>Doctor Login</h1>
+      <div class="card" style="max-width: 24rem;">
+        <form id="login-form">
+          <label for="username">Username</label>
+          <input type="text" id="username" required />
+
+          <label for="password">Password</label>
+          <input type="password" id="password" required />
+
+          <div id="login-error" class="error-note" style="display:none;"></div>
+
+          <p style="margin-top:1rem;">
+            <button type="submit" class="btn">Log In</button>
+          </p>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <script src="../js/config.js"></script>
+  <script src="admin.js"></script>
+</body>
+</html>

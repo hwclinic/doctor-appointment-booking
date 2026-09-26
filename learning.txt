@@ -1,0 +1,38 @@
+file:///C:/dev/Learning/doctor-appointment-booking/index.html
+http://127.0.0.1:5500/admin/dashboard.html
+
+Deployment checklist
+
+1. GitHub (source code + website hosting)
+
+1. Create a free GitHub account (if you don't have one) at github.com.
+2. Create a new empty repository (e.g.  doctor-appointment-booking ) — don't initialize with a README (you already have one).
+3. From  C:\dev\Learning\doctor-appointment-booking :
+git remote add origin https://github.com/YOUR-USERNAME/doctor-appointment-booking.git
+git push -u origin master
+4. In the repo's Settings → Pages, set source to your  master  branch, root folder. GitHub gives you a URL like  https://YOUR-USERNAME.github.io/doctor-appointment-booking/ .
+
+2. Cloudflare (Worker + D1 database — the backend)
+
+1. Create a free Cloudflare account at cloudflare.com (no credit card needed for Workers/D1 free tier).
+2. In  worker/  folder:  npx wrangler login  (opens browser to link your account).
+3.  npx wrangler d1 create doctor_appointments  — prints a  database_id ; paste it into  worker/wrangler.toml .
+4.  npm run db:init:remote  (loads the schema onto your real database — still empty/fake data).
+5. Set your real admin password:  node generate-admin-password.js "YourRealPassword" , then set secrets (never in a file):
+npx wrangler secret put ADMIN_USERNAME
+npx wrangler secret put ADMIN_PASSWORD_SALT
+npx wrangler secret put ADMIN_PASSWORD_HASH
+npx wrangler secret put SESSION_SECRET
+6. Update  wrangler.toml 's  ALLOWED_ORIGIN  to your real GitHub Pages URL from step 1.4.
+7.  npm run deploy  — prints your live Worker URL (e.g.  https://doctor-appointment-booking-api.YOUR-SUBDOMAIN.workers.dev ).
+8. Update  js/config.js 's  API_BASE_URL  to that Worker URL, then commit + push that one-line change.
+
+3. Optional — Zoom (only if you want real video links)
+
+Steps are in  worker/README.md  under "Optional: enabling Zoom video links" — create a free Server-to-Server OAuth app at marketplace.zoom.us, then  wrangler secret put  the 3 Zoom values.
+
+4. Verify
+
+Visit your GitHub Pages URL, make a real test booking, check it appears in the admin dashboard at  YOUR-PAGES-URL/admin/ .
+
+Reminder: keep using fake/test data until you've done a separate security/privacy review before entering real patient information.

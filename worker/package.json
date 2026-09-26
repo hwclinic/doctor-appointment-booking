@@ -1,0 +1,14 @@
+{
+  "name": "doctor-appointment-booking-worker",
+  "private": true,
+  "version": "0.0.1",
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy",
+    "db:init:local": "wrangler d1 execute doctor_appointments --local --file=./schema.sql",
+    "db:init:remote": "wrangler d1 execute doctor_appointments --remote --file=./schema.sql"
+  },
+  "devDependencies": {
+    "wrangler": "^3.90.0"
+  }
+}

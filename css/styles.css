@@ -1,0 +1,307 @@
+/* ==========================================================================
+   Global styles for the Doctor Appointment Booking website
+   Beginner note: this one file styles every page. We keep it simple:
+   colors and fonts as CSS variables at the top, then layout rules below.
+   ========================================================================== */
+
+:root {
+  --color-primary: #2f6f5e;   /* calm teal-green, medical/healthcare feel */
+  --color-primary-dark: #234f43;
+  --color-bg: #f7f9f8;
+  --color-card: #ffffff;
+  --color-text: #22302c;
+  --color-muted: #5b6b66;
+  --color-border: #dbe4e1;
+  --color-available: #e4f6ec;
+  --color-available-text: #1e7a46;
+  --color-booked: #f6e4e4;
+  --color-booked-text: #a13030;
+  --radius: 10px;
+  --max-width: 960px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+  background: var(--color-bg);
+  color: var(--color-text);
+  line-height: 1.5;
+}
+
+a {
+  color: var(--color-primary);
+}
+
+.container {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 1.25rem;
+}
+
+/* ---------- Header / Nav ---------- */
+
+.site-header {
+  background: var(--color-primary);
+  color: #fff;
+}
+
+.site-header .container {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+
+.site-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #fff;
+  text-decoration: none;
+}
+
+.site-nav {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.site-nav a {
+  color: #eef6f2;
+  text-decoration: none;
+  font-weight: 500;
+  padding: 0.25rem 0;
+}
+
+.site-nav a:hover,
+.site-nav a[aria-current="page"] {
+  border-bottom: 2px solid #fff;
+}
+
+/* ---------- Hero ---------- */
+
+.hero {
+  padding: 3rem 0 2.5rem;
+  text-align: center;
+}
+
+.hero h1 {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+}
+
+.hero p {
+  color: var(--color-muted);
+  max-width: 40rem;
+  margin: 0 auto 1.5rem;
+}
+
+/* ---------- Buttons ---------- */
+
+.btn {
+  display: inline-block;
+  background: var(--color-primary);
+  color: #fff;
+  text-decoration: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: var(--radius);
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+.btn:hover {
+  background: var(--color-primary-dark);
+}
+
+.btn-secondary {
+  background: transparent;
+  color: var(--color-primary);
+  border: 2px solid var(--color-primary);
+}
+
+.btn-secondary:hover {
+  background: var(--color-primary);
+  color: #fff;
+}
+
+/* The logout button lives inside the colored .site-header, where
+   .btn-secondary's teal-on-transparent styling would be invisible
+   (same color as the header background). This gives it visible white
+   text/border there instead, matching the rest of the header nav. */
+.site-header .btn-secondary {
+  color: #fff;
+  border-color: #fff;
+}
+
+.site-header .btn-secondary:hover {
+  background: #fff;
+  color: var(--color-primary);
+}
+
+/* ---------- Cards / sections ---------- */
+
+section {
+  padding: 2rem 0;
+}
+
+.card {
+  background: var(--color-card);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  padding: 1.5rem;
+}
+
+.card-grid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+}
+
+.placeholder-note {
+  background: #fff8e1;
+  border: 1px solid #f0d98a;
+  color: #6b5300;
+  padding: 0.75rem 1rem;
+  border-radius: var(--radius);
+  font-size: 0.9rem;
+  margin-bottom: 1.5rem;
+}
+
+/* ---------- Booking page ---------- */
+
+.slot-list {
+  display: grid;
+  gap: 0.5rem;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  margin: 1rem 0;
+}
+
+.slot {
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  padding: 0.6rem;
+  text-align: center;
+  background: #fff;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.slot.available {
+  background: var(--color-available);
+  color: var(--color-available-text);
+}
+
+.slot.booked {
+  background: var(--color-booked);
+  color: var(--color-booked-text);
+  cursor: not-allowed;
+  opacity: 0.8;
+}
+
+.slot.selected {
+  outline: 3px solid var(--color-primary);
+}
+
+label {
+  display: block;
+  font-weight: 600;
+  margin-top: 1rem;
+  margin-bottom: 0.25rem;
+}
+
+input,
+select {
+  width: 100%;
+  padding: 0.6rem;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  font-size: 1rem;
+}
+
+.consult-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: 0.5rem;
+}
+
+.consult-option {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-weight: 500;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  padding: 0.6rem 0.9rem;
+  cursor: pointer;
+}
+
+.consult-option input {
+  width: auto;
+}
+
+.consult-option.option-disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.consult-note {
+  font-weight: 400;
+  font-size: 0.8rem;
+  color: var(--color-muted);
+}
+
+.error-note {
+  background: var(--color-booked);
+  color: var(--color-booked-text);
+  border: 1px solid #e6b9b9;
+  border-radius: var(--radius);
+  padding: 0.75rem 1rem;
+  margin-top: 1rem;
+}
+
+.confirmation {
+  background: var(--color-available);
+  border: 1px solid #bfe6cf;
+  border-radius: var(--radius);
+  padding: 1.25rem;
+  margin-top: 1.5rem;
+}
+
+/* ---------- Footer ---------- */
+
+.weekday-checkboxes {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  margin-top: 0.5rem;
+}
+
+.weekday-checkboxes label {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  font-weight: 500;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  padding: 0.4rem 0.7rem;
+  margin: 0;
+}
+
+.weekday-checkboxes input {
+  width: auto;
+}
+
+.site-footer {
+  text-align: center;
+  color: var(--color-muted);
+  font-size: 0.85rem;
+  padding: 2rem 0;
+}

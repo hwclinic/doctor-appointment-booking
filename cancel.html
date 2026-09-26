@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cancel Appointment — Dr. [Doctor Name]</title>
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <a class="site-title" href="index.html">Dr. [Doctor Name] Homeopathic Clinic</a>
+      <nav class="site-nav">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="services.html">Services</a>
+        <a href="book.html">Book Appointment</a>
+        <a href="view-booking.html">View My Booking</a>
+        <a href="cancel.html" aria-current="page">Cancel Appointment</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <section>
+      <h1>Cancel an Appointment</h1>
+      <div class="placeholder-note">
+        Enter the booking reference number you received when you booked
+        (for example <code>APT-7F3K2Q</code>). For your privacy, this is
+        the only information we ask for — we never look up appointments by
+        name or phone number here.
+      </div>
+      <div class="card">
+        <form id="cancel-form">
+          <label for="reference-input">Booking reference number</label>
+          <input type="text" id="reference-input" name="reference" placeholder="e.g. APT-7F3K2Q" required />
+
+          <div id="cancel-error" class="error-note" style="display:none;"></div>
+
+          <p style="margin-top:1rem;">
+            <button type="submit" id="cancel-btn" class="btn">Cancel Appointment</button>
+          </p>
+        </form>
+
+        <div id="cancel-success" class="confirmation" style="display:none;"></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>&copy; 2026 [Clinic Name Placeholder]. Placeholder content for a learning project.</p>
+    </div>
+  </footer>
+
+  <script src="js/config.js"></script>
+  <script src="js/cancel.js"></script>
+</body>
+</html>

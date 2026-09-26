@@ -1,0 +1,7 @@
+# Local Wrangler state (simulated local D1 database, cache) — never commit.
+.wrangler/
+
+# Local-only secrets used by `wrangler dev` — never commit.
+.dev.vars
+
+node_modules/

@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Doctor Dashboard — Admin</title>
+  <link rel="stylesheet" href="../css/styles.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <span class="site-title">Clinic Admin</span>
+      <nav class="site-nav">
+        <button id="logout-btn" class="btn btn-secondary" style="padding:0.4rem 1rem;">Log Out</button>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <section>
+      <h1>Dashboard</h1>
+
+      <div class="card-grid" style="margin-bottom:1.5rem;">
+        <div class="card">
+          <h3 id="stat-total">-</h3>
+          <p>Total appointments (upcoming)</p>
+        </div>
+        <div class="card">
+          <h3 id="stat-booked">-</h3>
+          <p>Currently booked</p>
+        </div>
+      </div>
+
+      <div class="card" style="margin-bottom:1.5rem;">
+        <h2>Clinic Settings</h2>
+        <label class="consult-option" style="display:inline-flex;">
+          <input type="checkbox" id="in-person-toggle" />
+          In-person consultations are open
+        </label>
+      </div>
+
+      <div class="card" style="margin-bottom:1.5rem;">
+        <h2>Weekly Availability</h2>
+        <p style="color:var(--color-muted); font-size:0.9rem;">
+          Set the doctor's recurring working hours (India time). Check the
+          days it applies to, then click "Save" followed by "Generate
+          Slots" to create real bookable appointment slots from it.
+        </p>
+        <form id="weekly-schedule-form">
+          <div class="weekday-checkboxes">
+            <label><input type="checkbox" value="0" /> Sun</label>
+            <label><input type="checkbox" value="1" /> Mon</label>
+            <label><input type="checkbox" value="2" /> Tue</label>
+            <label><input type="checkbox" value="3" /> Wed</label>
+            <label><input type="checkbox" value="4" /> Thu</label>
+            <label><input type="checkbox" value="5" /> Fri</label>
+            <label><input type="checkbox" value="6" /> Sat</label>
+          </div>
+
+          <label for="schedule-start">Start time (India time)</label>
+          <input type="time" id="schedule-start" required />
+
+          <label for="schedule-end">End time (India time)</label>
+          <input type="time" id="schedule-end" required />
+
+          <label for="schedule-duration">Slot length (minutes)</label>
+          <input type="number" id="schedule-duration" min="5" step="5" value="30" required />
+
+          <p style="margin-top:1rem; display:flex; gap:0.5rem; flex-wrap:wrap;">
+            <button type="submit" class="btn">Save Weekly Schedule</button>
+            <button type="button" id="generate-slots-btn" class="btn btn-secondary">Generate Slots for Next 30 Days</button>
+          </p>
+          <div id="schedule-message" class="placeholder-note" style="display:none;"></div>
+        </form>
+      </div>
+
+      <div class="card" style="margin-bottom:1.5rem;">
+        <h2>Add a Single Appointment Slot</h2>
+        <form id="add-slot-form">
+          <label for="slot-date">Date</label>
+          <input type="date" id="slot-date" required />
+          <label for="slot-time">Time</label>
+          <input type="time" id="slot-time" required />
+          <p style="margin-top:1rem;">
+            <button type="submit" class="btn">Add Slot</button>
+          </p>
+        </form>
+      </div>
+
+      <div class="card" style="margin-bottom:1.5rem;">
+        <h2>Block/Unblock a Whole Day</h2>
+        <p style="color:var(--color-muted); font-size:0.9rem;">
+          Useful for a day off or holiday — instantly blocks (or reopens)
+          every never-booked slot on that date. Already-booked appointments
+          are never affected.
+        </p>
+        <form id="block-day-form">
+          <label for="block-day-date">Date</label>
+          <input type="date" id="block-day-date" required />
+          <p style="margin-top:1rem; display:flex; gap:0.5rem;">
+            <button type="submit" data-action="block" class="btn">Block Whole Day</button>
+            <button type="submit" data-action="unblock" class="btn btn-secondary">Unblock Whole Day</button>
+          </p>
+        </form>
+      </div>
+
+      <div class="card">
+        <h2>Appointments</h2>
+        <table id="appointments-table" style="width:100%; border-collapse: collapse;">
+          <thead>
+            <tr>
+              <th style="text-align:left; border-bottom:1px solid var(--color-border); padding:0.5rem;">Date</th>
+              <th style="text-align:left; border-bottom:1px solid var(--color-border); padding:0.5rem;">Time</th>
+              <th style="text-align:left; border-bottom:1px solid var(--color-border); padding:0.5rem;">Status</th>
+              <th style="text-align:left; border-bottom:1px solid var(--color-border); padding:0.5rem;">Type</th>
+              <th style="text-align:left; border-bottom:1px solid var(--color-border); padding:0.5rem;">Patient</th>
+              <th style="text-align:left; border-bottom:1px solid var(--color-border); padding:0.5rem;">Phone</th>
+              <th style="text-align:left; border-bottom:1px solid var(--color-border); padding:0.5rem;">Reference</th>
+              <th style="text-align:left; border-bottom:1px solid var(--color-border); padding:0.5rem;">Zoom Link</th>
+              <th style="text-align:left; border-bottom:1px solid var(--color-border); padding:0.5rem;">Actions</th>
+            </tr>
+          </thead>
+          <tbody id="appointments-body"></tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <script src="../js/config.js"></script>
+  <script src="admin.js"></script>
+</body>
+</html>

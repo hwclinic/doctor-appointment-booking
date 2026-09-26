@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Book Appointment — Dr. [Doctor Name]</title>
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <a class="site-title" href="index.html">Dr. [Doctor Name] Homeopathic Clinic</a>
+      <nav class="site-nav">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="services.html">Services</a>
+        <a href="book.html" aria-current="page">Book Appointment</a>
+        <a href="view-booking.html">View My Booking</a>
+        <a href="cancel.html">Cancel Appointment</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <section>
+      <h1>Book an Appointment</h1>
+      <div class="placeholder-note">
+        <strong>Test/demo data only:</strong> this page is connected to a
+        real backend (Cloudflare Worker + database) but everything in it
+        is fake test data. Do not enter real patient information.
+      </div>
+
+      <div class="card">
+        <form id="booking-form">
+          <label for="date-select">1. Choose a date</label>
+          <select id="date-select" name="date">
+            <option value="">-- Select a date --</option>
+          </select>
+
+          <label>2. Choose an available time</label>
+          <div id="slot-list" class="slot-list"></div>
+
+          <label>3. Choose consultation type</label>
+          <div class="consult-options">
+            <label class="consult-option">
+              <input type="radio" name="consultationType" value="online" checked />
+              Online Consultation
+            </label>
+            <label class="consult-option" id="in-person-label">
+              <input type="radio" name="consultationType" value="in_person" id="consult-in-person" />
+              In-Person Consultation
+              <span class="consult-note">(opens once the clinic starts operating)</span>
+            </label>
+          </div>
+
+          <label for="patient-name">4. Your name</label>
+          <input type="text" id="patient-name" name="patientName" placeholder="e.g. Test Patient 1" required />
+
+          <label for="patient-phone">5. Your phone number</label>
+          <input type="tel" id="patient-phone" name="patientPhone" placeholder="e.g. 9999999999" required />
+
+          <div id="booking-error" class="error-note" style="display:none;"></div>
+
+          <p style="margin-top:1rem;">
+            <button type="submit" id="confirm-btn" class="btn" disabled>Confirm Booking</button>
+          </p>
+        </form>
+
+        <div id="confirmation" class="confirmation" style="display:none;"></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>&copy; 2026 [Clinic Name Placeholder]. Demo data only — do not enter real patient information.</p>
+    </div>
+  </footer>
+
+  <script src="js/config.js"></script>
+  <script src="js/booking.js"></script>
+</body>
+</html>

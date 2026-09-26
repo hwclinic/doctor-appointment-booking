@@ -1,0 +1,25 @@
+# ==========================================================================
+# Cloudflare Worker configuration.
+# Beginner note: this file tells Cloudflare "what to run" (main) and "which
+# free database to attach" (the [[d1_databases]] block). It contains no
+# secrets — passwords/session keys are set separately as Wrangler "secrets"
+# (see worker/README.md), never written into this file.
+# ==========================================================================
+
+name = "doctor-appointment-booking-api"
+main = "src/index.js"
+compatibility_date = "2024-09-23"
+
+# You will replace database_id with your own after running:
+#   npx wrangler d1 create doctor_appointments
+# (that command prints a database_id for YOUR Cloudflare account)
+[[d1_databases]]
+binding = "DB"
+database_name = "doctor_appointments"
+database_id = "REPLACE_WITH_YOUR_D1_DATABASE_ID"
+
+# The exact origin (website address) allowed to call this API.
+# During local development this is the Live Server address; after you
+# deploy to GitHub Pages, change it to your real https://...github.io URL.
+[vars]
+ALLOWED_ORIGIN = "http://127.0.0.1:5500"

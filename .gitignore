@@ -1,0 +1,18 @@
+# Never commit secrets, credentials, or real patient data.
+
+# OS/editor junk
+.DS_Store
+Thumbs.db
+*.swp
+
+# Editor folders
+.vscode/
+
+# Future backend secrets (Stage 2) — placeholders for when these appear
+.env
+*.key
+credentials.json
+appsscript-secrets.json
+
+# Node (only if we ever add a local dev tool via npm)
+node_modules/
