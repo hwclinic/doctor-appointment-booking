@@ -55,6 +55,23 @@
           <label for="patient-phone">5. Your phone number</label>
           <input type="tel" id="patient-phone" name="patientPhone" placeholder="Enter your phone number" required />
 
+          <label for="patient-email">6. Your email address<span class="consult-note">(optional)</span></label>
+
+
+<input
+  type="email"
+  id="patient-email"
+  name="patientEmail"
+  placeholder="Enter your email address (optional)"
+  autocomplete="email"
+/>
+
+<p class="consult-note">
+  If you provide an email address, we will send your appointment
+  confirmation and booking reference by email.
+</p>
+
+
           <div id="booking-error" class="error-note" style="display:none;"></div>
 
           <p style="margin-top:1rem;">
