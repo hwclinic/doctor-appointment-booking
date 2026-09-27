@@ -1,40 +1,38 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Doctor Login — Admin</title>
-  <link rel="stylesheet" href="../css/styles.css" />
-</head>
-<body>
-  <header class="site-header">
-    <div class="container">
-      <span class="site-title">Clinic Admin</span>
-    </div>
-  </header>
+<!DOCTYPE html> <html lang="en"> <head> <meta charset="UTF-8" /> <meta name="viewport" content="width=device-width, initial-scale=1.0" /> <title>Doctor Login — Clinic Admin</title> <link rel="stylesheet" href="../css/styles.css" /> </head> <body> <header class="site-header"> <div class="container"> <span class="site-title">Dr. Revathy, Homoeopathic Wellness Clinic</span> </div> </header> <main class="container"> <section> <h1>Doctor Login</h1>
+  <div class="card" style="max-width: 24rem;">
+    <p>
+      Sign in to access the clinic administration area and manage
+      appointments.
+    </p>
 
-  <main class="container">
-    <section>
-      <h1>Doctor Login</h1>
-      <div class="card" style="max-width: 24rem;">
-        <form id="login-form">
-          <label for="username">Username</label>
-          <input type="text" id="username" required />
+    <form id="login-form">
+      <label for="username">Username</label>
+      <input
+        type="text"
+        id="username"
+        autocomplete="username"
+        required
+      />
 
-          <label for="password">Password</label>
-          <input type="password" id="password" required />
+      <label for="password">Password</label>
+      <input
+        type="password"
+        id="password"
+        autocomplete="current-password"
+        required
+      />
 
-          <div id="login-error" class="error-note" style="display:none;"></div>
+      <div id="login-error" class="error-note" style="display:none;"></div>
 
-          <p style="margin-top:1rem;">
-            <button type="submit" class="btn">Log In</button>
-          </p>
-        </form>
-      </div>
-    </section>
-  </main>
+      <p style="margin-top:1rem;">
+        <button type="submit" class="btn">Log In</button>
+      </p>
+    </form>
 
-  <script src="../js/config.js"></script>
-  <script src="admin.js"></script>
-</body>
-</html>
+    <p class="consult-note">
+      This area is restricted to authorised clinic personnel.
+    </p>
+  </div>
+</section>
+
+</main> <script src="../js/config.js"></script> <script src="admin.js"></script> </body> </html>

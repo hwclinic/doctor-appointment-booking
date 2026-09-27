@@ -1,96 +1,149 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Book Appointment — Dr.Revathy</title>
-  <link rel="stylesheet" href="css/styles.css" />
-</head>
-<body>
-  <header class="site-header">
-    <div class="container">
-      <a class="site-title" href="index.html">Dr.Revathy, Homoeopathic Wellness Clinic</a>
-      <nav class="site-nav">
-        <a href="index.html">Home</a>
-        <a href="about.html">About</a>
-        <a href="services.html">Services</a>
-        <a href="book.html" aria-current="page">Book Appointment</a>
-        <a href="view-booking.html">View My Booking</a>
-        <a href="cancel.html">Cancel Appointment</a>
-      </nav>
-    </div>
-  </header>
+<!DOCTYPE html> <html lang="en"> <head> <meta charset="UTF-8" /> <meta name="viewport" content="width=device-width, initial-scale=1.0" /> <title>Book Appointment — Dr. Revathy</title> <link rel="stylesheet" href="css/styles.css" /> </head> <body> <header class="site-header"> <div class="container"> <a class="site-title" href="index.html">Dr. Revathy, Homoeopathic Wellness Clinic</a>
+  <nav class="site-nav">
+    <a href="index.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="services.html">Services</a>
+    <a href="book.html" aria-current="page">Book Appointment</a>
+    <a href="view-booking.html">View My Booking</a>
+    <a href="cancel.html">Cancel Appointment</a>
+  </nav>
+</div>
 
-  <main class="container">
-    <section>
-      <h1>Book an Appointment</h1>
-      
+</header> <main class="container"> <section> <h1>Book an Appointment</h1>
+  <p>
+    Book an online consultation with Dr. Revathy. Choose a convenient
+    date and available time below.
+  </p>
 
-      <div class="card">
-        <form id="booking-form">
-          <label for="date-select">1. Choose a date</label>
-          <select id="date-select" name="date">
-            <option value="">-- Select a date --</option>
-          </select>
+  <div class="card">
+    <form id="booking-form">
 
-          <label>2. Choose an available time</label>
-          <div id="slot-list" class="slot-list"></div>
+      <label for="date-select">1. Choose a date</label>
+      <select id="date-select" name="date">
+        <option value="">-- Select a date --</option>
+      </select>
 
-          <label>3. Choose consultation type</label>
-          <div class="consult-options">
-            <label class="consult-option">
-              <input type="radio" name="consultationType" value="online" checked />
-              Online Consultation
-            </label>
-            <label class="consult-option" id="in-person-label">
-              <input type="radio" name="consultationType" value="in_person" id="consult-in-person" />
-              In-Person Consultation
-              <span class="consult-note">(opens once the clinic starts operating)</span>
-            </label>
-          </div>
+      <label>2. Choose an available time</label>
+      <div id="slot-list" class="slot-list"></div>
 
-          <label for="patient-name">4. Your name</label>
-          <input type="text" id="patient-name" name="patientName" placeholder="Enter Your Name" required />
+      <label>3. Choose consultation type</label>
 
-          <label for="patient-phone">5. Your phone number</label>
-          <input type="tel" id="patient-phone" name="patientPhone" placeholder="Enter your phone number" required />
+      <div class="consult-options">
 
-          <label for="patient-email">6. Your email address<span class="consult-note">(optional)</span></label>
+        <label class="consult-option">
+          <input
+            type="radio"
+            name="consultationType"
+            value="online"
+            checked
+          />
+          Online Consultation
+        </label>
 
+        <label
+          class="consult-option option-disabled"
+          id="in-person-label"
+        >
+          <input
+            type="radio"
+            name="consultationType"
+            value="in_person"
+            id="consult-in-person"
+            disabled
+          />
+          In-Person Consultation
+          <span class="consult-note">
+            (currently unavailable)
+          </span>
+        </label>
 
-<input
-  type="email"
-  id="patient-email"
-  name="patientEmail"
-  placeholder="Enter your email address (optional)"
-  autocomplete="email"
-/>
-
-<p class="consult-note">
-  If you provide an email address, we will send your appointment
-  confirmation and booking reference by email.
-</p>
-
-
-          <div id="booking-error" class="error-note" style="display:none;"></div>
-
-          <p style="margin-top:1rem;">
-            <button type="submit" id="confirm-btn" class="btn" disabled>Confirm Booking</button>
-          </p>
-        </form>
-
-        <div id="confirmation" class="confirmation" style="display:none;"></div>
       </div>
-    </section>
-  </main>
 
-  <footer class="site-footer">
-    <div class="container">
-      <p>&copy; 2026 [Homoeopathic Wellness Clinic]</p>
-    </div>
-  </footer>
+      <label for="patient-name">4. Your name</label>
 
-  <script src="js/config.js"></script>
-  <script src="js/booking.js"></script>
-</body>
-</html>
+      <input
+        type="text"
+        id="patient-name"
+        name="patientName"
+        placeholder="Enter your name"
+        autocomplete="name"
+        required
+      />
+
+      <label for="patient-phone">5. Your phone number</label>
+
+      <input
+        type="tel"
+        id="patient-phone"
+        name="patientPhone"
+        placeholder="Enter your phone number"
+        autocomplete="tel"
+        required
+      />
+
+      <label for="patient-email">
+        6. Your email address
+        <span class="consult-note">(optional)</span>
+      </label>
+
+      <input
+        type="email"
+        id="patient-email"
+        name="patientEmail"
+        placeholder="Enter your email address (optional)"
+        autocomplete="email"
+      />
+
+      <p class="consult-note">
+        If you provide an email address, your appointment details and
+        booking reference will also be sent to you by email.
+      </p>
+
+      <div
+        id="booking-error"
+        class="error-note"
+        style="display:none;"
+      ></div>
+
+      <p style="margin-top:1rem;">
+        <button
+          type="submit"
+          id="confirm-btn"
+          class="btn"
+          disabled
+        >
+          Confirm Booking
+        </button>
+      </p>
+
+    </form>
+
+    <div
+      id="confirmation"
+      class="confirmation"
+      style="display:none;"
+    ></div>
+  </div>
+
+  <div class="card" style="margin-top:1.5rem;">
+    <h2>After You Book</h2>
+
+    <p>
+      Your booking reference will always be displayed on the screen
+      after a successful booking. Please save it safely.
+    </p>
+
+    <p>
+      If you provide your email address, we will also send your
+      appointment details to that address.
+    </p>
+
+    <p>
+      For online consultations, the video consultation link will be
+      included when available.
+    </p>
+  </div>
+
+</section>
+
+</main> <footer class="site-footer"> <div class="container"> <p>&copy; 2026 Homoeopathic Wellness Clinic</p> </div> </footer> <script src="js/config.js"></script> <script src="js/booking.js"></script> </body> </html>
