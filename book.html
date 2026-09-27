@@ -1,4 +1,8 @@
-<!DOCTYPE html> <html lang="en"> <head> <meta charset="UTF-8" /> <meta name="viewport" content="width=device-width, initial-scale=1.0" /> <title>Book Appointment — Dr. Revathy</title> <link rel="stylesheet" href="css/styles.css" /> </head> <body> <header class="site-header"> <div class="container"> <a class="site-title" href="index.html">Dr. Revathy, Homoeopathic Wellness Clinic</a>
+<!DOCTYPE html> <html lang="en"> <head> <meta charset="UTF-8" /> <meta name="viewport" content="width=device-width, initial-scale=1.0" /> <title>Book Appointment — Dr. Revathy</title> <link rel="stylesheet" href="css/styles.css" /> </head> <body> <header class="site-header"> <div class="container">
+  <a class="site-title" href="index.html">
+    Dr. Revathy, Homoeopathic Wellness Clinic
+  </a>
+
   <nav class="site-nav">
     <a href="index.html">Home</a>
     <a href="about.html">About</a>
@@ -7,43 +11,80 @@
     <a href="view-booking.html">View My Booking</a>
     <a href="cancel.html">Cancel Appointment</a>
   </nav>
+
 </div>
 
-</header> <main class="container"> <section> <h1>Book an Appointment</h1>
+</header> <main class="container">
+<section>
+
+  <h1>Book an Appointment</h1>
+
   <p>
     Book an online consultation with Dr. Revathy. Choose a convenient
     date and available time below.
   </p>
 
+
+  <div class="timezone-notice">
+
+    <strong>Appointment times are shown in Indian Standard Time (IST)</strong>
+
+    <p>
+      All available appointment times displayed below are in
+      <strong>IST (UTC+5:30)</strong>.
+      If you are joining from any another time zone,
+      please check the corresponding local time before booking.
+    </p>
+
+  </div>
+
+
   <div class="card">
+
     <form id="booking-form">
 
-      <label for="date-select">1. Choose a date</label>
+
+      <label for="date-select">
+        1. Choose a date
+      </label>
+
       <select id="date-select" name="date">
         <option value="">-- Select a date --</option>
       </select>
 
-      <label>2. Choose an available time</label>
+
+      <label>
+        2. Choose an available time
+      </label>
+
       <div id="slot-list" class="slot-list"></div>
 
-      <label>3. Choose consultation type</label>
+
+      <label>
+        3. Choose consultation type
+      </label>
 
       <div class="consult-options">
 
         <label class="consult-option">
+
           <input
             type="radio"
             name="consultationType"
             value="online"
             checked
           />
+
           Online Consultation
+
         </label>
+
 
         <label
           class="consult-option option-disabled"
           id="in-person-label"
         >
+
           <input
             type="radio"
             name="consultationType"
@@ -51,15 +92,21 @@
             id="consult-in-person"
             disabled
           />
+
           In-Person Consultation
+
           <span class="consult-note">
             (currently unavailable)
           </span>
+
         </label>
 
       </div>
 
-      <label for="patient-name">4. Your name</label>
+
+      <label for="patient-name">
+        4. Your name
+      </label>
 
       <input
         type="text"
@@ -70,7 +117,10 @@
         required
       />
 
-      <label for="patient-phone">5. Your phone number</label>
+
+      <label for="patient-phone">
+        5. Your phone number
+      </label>
 
       <input
         type="tel"
@@ -81,9 +131,15 @@
         required
       />
 
+
       <label for="patient-email">
+
         6. Your email address
-        <span class="consult-note">(optional)</span>
+
+        <span class="consult-note">
+          (optional)
+        </span>
+
       </label>
 
       <input
@@ -99,13 +155,16 @@
         booking reference will also be sent to you by email.
       </p>
 
+
       <div
         id="booking-error"
         class="error-note"
         style="display:none;"
       ></div>
 
+
       <p style="margin-top:1rem;">
+
         <button
           type="submit"
           id="confirm-btn"
@@ -114,18 +173,23 @@
         >
           Confirm Booking
         </button>
+
       </p>
 
     </form>
+
 
     <div
       id="confirmation"
       class="confirmation"
       style="display:none;"
     ></div>
+
   </div>
 
+
   <div class="card" style="margin-top:1.5rem;">
+
     <h2>After You Book</h2>
 
     <p>
@@ -142,8 +206,34 @@
       For online consultations, the video consultation link will be
       included when available.
     </p>
+
+    <p>
+      Please note that appointment times are displayed in
+      <strong>Indian Standard Time (IST, UTC+5:30)</strong>.
+    </p>
+
   </div>
 
 </section>
 
-</main> <footer class="site-footer"> <div class="container"> <p>&copy; 2026 Homoeopathic Wellness Clinic</p> </div> </footer> <script src="js/config.js"></script> <script src="js/booking.js"></script> </body> </html>
+</main> <footer class="site-footer">
+<div class="container">
+
+  <p>
+    &copy; 2026 Homoeopathic Wellness Clinic
+  </p>
+
+  <a
+    class="facebook-link"
+    href="https://www.facebook.com/people/Homoeopathic-Wellness-Clinic/100057610862098/?rdid=MGpBjhCgXXUhOLza&share_url=https%3A%2F%2Fwww.facebook.com%2Fshare%2F19XT5n5m8X%2F"
+    target="_blank"
+    rel="noopener noreferrer"
+    aria-label="Visit Homoeopathic Wellness Clinic on Facebook"
+    title="Homoeopathic Wellness Clinic on Facebook"
+  >
+    <span aria-hidden="true">f</span>
+  </a>
+
+</div>
+
+</footer> <script src="js/config.js"></script> <script src="js/booking.js"></script> </body> </html>
