@@ -125,7 +125,9 @@ async function handleFormSubmit(event) {
 
   const name = document.getElementById("patient-name").value.trim();
   const phone = document.getElementById("patient-phone").value.trim();
+  const email = document.getElementById("patient-email").value.trim();
   const consultationType = document.querySelector('input[name="consultationType"]:checked')?.value;
+
   const confirmBtn = document.getElementById("confirm-btn");
   const errorBox = document.getElementById("booking-error");
   errorBox.style.display = "none";
@@ -144,12 +146,14 @@ async function handleFormSubmit(event) {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        date: selectedDate,
-        time: selectedSlot,
-        patientName: name,
-        patientPhone: phone,
-        consultationType,
-      }),
+      date: selectedDate,
+      time: selectedSlot,
+      patientName: name,
+      patientPhone: phone,
+      patientEmail: email,
+      consultationType,
+}),
+
     });
     const result = await response.json();
 
