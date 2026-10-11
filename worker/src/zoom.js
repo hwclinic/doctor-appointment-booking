@@ -19,20 +19,16 @@
 
 /*
 
-Zoom Meeting Creation — Server-to-Server OAuth
-File: worker/src/zoom.js
-
-Required Cloudflare Worker secrets:
-ZOOM_ACCOUNT_ID
-ZOOM_CLIENT_ID
-ZOOM_CLIENT_SECRET
-
-Creates a Zoom meeting and returns its join URL.
-If Zoom fails, the appointment booking can still proceed.
-Check Cloudflare Worker logs for the exact failure.
-===================================================
-
-*/
+* Zoom meeting creation via Server-to-Server OAuth.
+*
+* Required Cloudflare Worker secrets:
+* ZOOM_ACCOUNT_ID
+* ZOOM_CLIENT_ID
+* ZOOM_CLIENT_SECRET
+*
+* Returns the patient-facing Zoom join URL on success.
+* Returns null if Zoom meeting creation fails.
+  */
 
 async function getZoomAccessToken(env) {
 const accountId = env.ZOOM_ACCOUNT_ID;
@@ -81,12 +77,7 @@ throw new Error(
 const data = await response.json();
 
 if (!data.access_token) {
-console.error("Zoom OAuth response did not contain an access token.");
-
-```
 throw new Error("Zoom access token is missing.");
-```
-
 }
 
 return data.access_token;
@@ -101,8 +92,7 @@ return data.access_token;
 * @param {string} options.date - Appointment date: YYYY-MM-DD.
 * @param {string} options.time - Appointment time: HH:mm.
 * @param {string} options.topic - Meeting title.
-*
-* @returns {Promise<string|null>} Zoom join URL, or null on failure.
+* @returns {Promise<string|null>} Zoom join URL or null on failure.
   */
   export async function createZoomMeeting(env, options = {}) {
   try {
@@ -112,7 +102,7 @@ return data.access_token;
   !env.ZOOM_CLIENT_SECRET
   ) {
   console.error(
-  "Zoom is not configured: one or more required Worker secrets are missing."
+  "Zoom is not configured: required Worker secrets are missing."
   );
   return null;
   }
@@ -128,27 +118,27 @@ return data.access_token;
 
   /*
 
-  * Your existing project assumes appointment times are in India
-  * Standard Time (UTC+05:30).
-  *
-  * If your clinic uses a different timezone, change this conversion
-  * and the timezone setting below to match your booking system.
+  * This project currently assumes appointment times are in
+  * India Standard Time (UTC+05:30).
     */
     const appointmentDate = new Date(
     `${date}T${time}:00+05:30`
     );
 
   if (Number.isNaN(appointmentDate.getTime())) {
-  console.error("Invalid appointment date/time:", { date, time });
+  console.error("Invalid appointment date/time:", {
+  date,
+  time,
+  });
   return null;
   }
 
   const startTimeUtc = appointmentDate.toISOString();
 
-  // Step 1: Authenticate with Zoom.
+  // Authenticate with Zoom.
   const accessToken = await getZoomAccessToken(env);
 
-  // Step 2: Create the scheduled meeting.
+  // Create the scheduled meeting.
   const response = await fetch(
   "https://api.zoom.us/v2/users/me/meetings",
   {
@@ -182,18 +172,15 @@ return data.access_token;
   return null;
   }
 
-  // Step 3: Read the meeting details.
   const meeting = await response.json();
 
   if (!meeting.join_url) {
   console.error(
-  "Zoom created a response without a join_url.",
+  "Zoom response did not contain a join_url.",
   {
   meetingId: meeting.id || null,
-  hasStartUrl: Boolean(meeting.start_url),
   }
   );
-
   return null;
   }
 
@@ -201,12 +188,11 @@ return data.access_token;
   meetingId: meeting.id || null,
   });
 
-  // Return the patient-facing meeting URL.
   return meeting.join_url;
   } catch (error) {
-  // Never log access tokens, client secrets, or authorization headers.
   console.error("Zoom integration error:", {
-  message: error instanceof Error
+  message:
+  error instanceof Error
   ? error.message
   : String(error),
   });
