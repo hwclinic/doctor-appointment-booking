@@ -3,10 +3,10 @@
   "private": true,
   "version": "0.0.1",
   "scripts": {
-    "dev": "wrangler dev",
-    "deploy": "wrangler deploy",
-    "db:init:local": "wrangler d1 execute doctor_appointments --local --file=./schema.sql",
-    "db:init:remote": "wrangler d1 execute doctor_appointments --remote --file=./schema.sql"
+    "dev": "wrangler dev --config wrangler.toml",
+    "deploy": "wrangler deploy --config wrangler.toml",
+    "db:init:local": "wrangler d1 execute doctor_appointments --local --file=./schema.sql --config wrangler.toml",
+    "db:init:remote": "wrangler d1 execute doctor_appointments --remote --file=./schema.sql --config wrangler.toml"
   },
   "devDependencies": {
     "wrangler": "^3.90.0"

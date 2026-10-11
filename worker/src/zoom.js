@@ -61,7 +61,6 @@ Authorization: `Basic ${credentials}`,
 if (!response.ok) {
 const errorDetails = await response.text();
 
-```
 console.error("Zoom OAuth token request failed:", {
   status: response.status,
   details: errorDetails,
@@ -70,7 +69,6 @@ console.error("Zoom OAuth token request failed:", {
 throw new Error(
   `Zoom OAuth failed with HTTP ${response.status}`
 );
-```
 
 }
 
