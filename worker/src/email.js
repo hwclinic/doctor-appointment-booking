@@ -26,24 +26,28 @@ export async function sendBookingConfirmation(env, recipient, appointment) {
   const consultationType = appointment.consultationType === "online"
     ? "Online consultation"
     : "In-person consultation";
-  const zoomLine = appointment.zoomJoinUrl
-    ? `\nZoom link: ${appointment.zoomJoinUrl}`
+  const zoomSection = appointment.zoomJoinUrl
+    ? `Zoom link:\n${appointment.zoomJoinUrl}`
     : appointment.consultationType === "online"
-      ? "\nA Zoom link was not available when this booking was made. Please contact the clinic before your appointment to arrange your online consultation."
-      : "";
+      ? "Zoom link:\nA link was not available when this booking was made. Please contact the clinic before your appointment to arrange your online consultation."
+      : null;
   const text = [
     "Hello,",
     "",
     "Your appointment with Dr. Revathy is confirmed.",
+    "",
+    "Appointment details",
     `Date: ${formatAppointmentDate(appointment.date)}`,
     `Time: ${formatAppointmentTime(appointment.time)} IST`,
     `Consultation: ${consultationType}`,
     `Booking reference: ${appointment.reference}`,
-    zoomLine,
+    ...(zoomSection ? ["", zoomSection] : []),
     "",
     "Please keep your booking reference to view or cancel your appointment.",
+    "",
+    "Warm regards,",
     "Dr. Revathy's Homoeopathic Wellness Clinic",
-  ].filter(Boolean).join("\n");
+  ].join("\n");
 
   try {
     const response = await fetch(RESEND_API_URL, {
