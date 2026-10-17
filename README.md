@@ -65,7 +65,7 @@ records in GoDaddy DNS:
 | A | @ | 185.199.109.153 |
 | A | @ | 185.199.110.153 |
 | A | @ | 185.199.111.153 |
-| CNAME | www | hwc-co.in |
+| CNAME | www | hwclinic.github.io |
 
 The apex A record currently points to a parked page; replace it with all
 four GitHub Pages A records above. Keep the GoDaddy nameservers and
