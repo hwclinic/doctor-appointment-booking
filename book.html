@@ -1,6 +1,6 @@
 <!DOCTYPE html> <html lang="en"> <head> <meta charset="UTF-8" /> <meta name="viewport" content="width=device-width, initial-scale=1.0" /> <title>Book Appointment — Dr. Revathy</title> <link rel="stylesheet" href="css/styles.css" /> </head> <body> <header class="site-header"> <div class="container">
-  <a class="site-title" href="index.html">
-    Dr. Revathy, Homoeopathic Wellness Clinic
+  <a class="site-brand" href="index.html" aria-label="Dr. Revathy, Homoeopathic Wellness Clinic — Home">
+    <img src="assets/clinic-brand.png" alt="Dr. Revathy, Homoeopathic Wellness Clinic" />
   </a>
 
   <nav class="site-nav">
@@ -15,14 +15,13 @@
 </div>
 
 </header> <main class="container">
-<section>
+<section class="booking-page">
 
-  <h1>Book an Appointment</h1>
-
-  <p>
-    Book an online consultation with Dr. Revathy. Choose a convenient
-    date and available time below.
-  </p>
+  <div class="page-intro">
+    <p class="eyebrow">A few simple steps</p>
+    <h1>Book an appointment</h1>
+    <p>Choose an available date and time, then enter your contact details to confirm your online consultation.</p>
+  </div>
 
 
   <div class="timezone-notice">
@@ -32,7 +31,7 @@
     <p>
       All available appointment times displayed below are in
       <strong>IST (UTC+5:30)</strong>.
-      If you are joining from any another time zone,
+      If you are joining from another time zone,
       please check the corresponding local time before booking.
     </p>
 
@@ -151,8 +150,9 @@
       />
 
       <p class="consult-note">
-        If you provide an email address, your appointment details and
-        booking reference will also be sent to you by email.
+        We'll try to email your booking details. The confirmation screen
+        will tell you whether it was sent. Your address is not stored in
+        the clinic booking database.
       </p>
 
 
@@ -163,8 +163,7 @@
       ></div>
 
 
-      <p style="margin-top:1rem;">
-
+      <div class="booking-submit-row">
         <button
           type="submit"
           id="confirm-btn"
@@ -173,8 +172,11 @@
         >
           Confirm Booking
         </button>
-
-      </p>
+        <p class="booking-reassurance">
+          <strong>Keep your reference.</strong> It appears after booking
+          and lets you view or cancel your appointment.
+        </p>
+      </div>
 
     </form>
 
@@ -187,32 +189,6 @@
 
   </div>
 
-
-  <div class="card" style="margin-top:1.5rem;">
-
-    <h2>After You Book</h2>
-
-    <p>
-      Your booking reference will always be displayed on the screen
-      after a successful booking. Please save it safely.
-    </p>
-
-    <p>
-      If you provide your email address, we will also send your
-      appointment details to that address.
-    </p>
-
-    <p>
-      For online consultations, the video consultation link will be
-      included when available.
-    </p>
-
-    <p>
-      Please note that appointment times are displayed in
-      <strong>Indian Standard Time (IST, UTC+5:30)</strong>.
-    </p>
-
-  </div>
 
 </section>
 

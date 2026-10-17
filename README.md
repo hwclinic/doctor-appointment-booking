@@ -27,6 +27,8 @@ What exists right now:
 - Cancellation only ever requires the booking reference number, and is
   rate-limited (2 attempts) before pointing the patient to call/message
   the clinic directly — never a name/phone lookup.
+- Optional appointment confirmation emails can be sent through Resend
+  after verifying a sending subdomain; see `worker/README.md`.
 
 ## Architecture (current)
 
@@ -126,6 +128,8 @@ doctor-appointment-booking/
 
 - Only `patient_name`, `patient_phone`, and appointment scheduling fields
   are ever stored — no email, no medical/health information, no address.
+- When email confirmation is enabled, the email address and appointment
+  details are sent to Resend for delivery but are not saved in D1.
 - The public site never shows a patient's name, phone, or any identifying
   detail — only whether a slot is "Available" or "Booked".
 - Real patient data would live only in the private Cloudflare D1
@@ -152,7 +156,8 @@ doctor-appointment-booking/
 
 - Single admin account only (one doctor, one password) — not a
   multi-user system.
-- No SMS/email confirmations yet.
+- Email confirmation needs the free Resend account, verified sending
+  subdomain, and Cloudflare API key described in `worker/README.md`.
 - Date selection on the booking page is a small fixed demo list, not a
   full calendar yet.
 - **This architecture has not been reviewed for real patient/medical
@@ -171,7 +176,7 @@ Use only clearly fake data during development, for example:
 
 ## Next stage (not started yet)
 
-Stage 3 ideas (to discuss before building): SMS/email confirmations,
+Stage 3 ideas (to discuss before building): SMS confirmations,
 a real calendar-based date picker, multi-day slot bulk creation, and
 eventually planning the Android app against the same Worker API.
 

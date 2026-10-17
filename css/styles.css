@@ -3,13 +3,13 @@ Global styles for the Doctor Appointment Booking website
 ========================================================================== */
 
 :root {
---color-primary: #2f6f5e;
+--color-primary: #286b4c;
 --color-primary-dark: #234f43;
---color-bg: #f7f9f8;
+--color-bg: #f8f8f2;
 --color-card: #ffffff;
 --color-text: #22302c;
 --color-muted: #5b6b66;
---color-border: #dbe4e1;
+--color-border: #dfe7dc;
 --color-available: #e4f6ec;
 --color-available-text: #1e7a46;
 --color-booked: #f6e4e4;
@@ -18,7 +18,7 @@ Global styles for the Doctor Appointment Booking website
 --max-width: 960px;
 }
 
-{
+* {
 box-sizing: border-box;
 }
 
@@ -63,6 +63,21 @@ color: #fff;
 text-decoration: none;
 }
 
+.site-brand {
+display: inline-flex;
+align-items: center;
+flex: 0 0 auto;
+background: #f6f8ed;
+border-radius: 6px;
+padding: 0.2rem 0.45rem;
+}
+
+.site-brand img {
+display: block;
+width: min(300px, 78vw);
+height: auto;
+}
+
 .site-nav {
 display: flex;
 gap: 1rem;
@@ -86,6 +101,15 @@ border-bottom: 2px solid #fff;
 .hero {
 padding: 3rem 0 2.5rem;
 text-align: center;
+}
+
+.clinic-promo {
+display: block;
+width: min(100%, 800px);
+height: auto;
+margin: 0 auto 2rem;
+border: 1px solid var(--color-border);
+border-radius: var(--radius);
 }
 
 .hero h1 {
@@ -352,6 +376,497 @@ display: block;
 transform: translateY(1px);
 }
 
+/* ---------- Patient-facing page layouts ---------- */
+
+.container {
+max-width: 1120px;
+}
+
+.site-header {
+background: #234f3b;
+box-shadow: 0 3px 16px rgba(25, 56, 41, 0.12);
+}
+
+.site-header .container {
+gap: 1.25rem;
+}
+
+.site-brand {
+padding: 0.3rem 0.55rem;
+}
+
+.site-brand img {
+width: min(300px, 78vw);
+}
+
+.site-nav {
+justify-content: flex-end;
+}
+
+.site-nav a {
+font-size: 0.92rem;
+}
+
+.home-hero {
+display: grid;
+grid-template-columns: minmax(0, 1.1fr) minmax(300px, 0.9fr);
+align-items: center;
+gap: 2rem;
+padding-top: 2.25rem;
+padding-bottom: 3.25rem;
+}
+
+.clinic-promo {
+width: 100%;
+margin: 0;
+box-shadow: 0 16px 38px rgba(39, 66, 48, 0.12);
+}
+
+.hero-copy {
+max-width: 520px;
+margin: 0;
+text-align: left;
+}
+
+.hero-copy h1 {
+max-width: 17ch;
+margin: 0 0 0.8rem;
+font-size: clamp(2rem, 4vw, 3rem);
+line-height: 1.14;
+letter-spacing: -0.035em;
+}
+
+.hero-copy > p:not(.eyebrow):not(.hero-note) {
+max-width: 600px;
+margin: 0 0 1.5rem;
+color: var(--color-muted);
+font-size: 1.12rem;
+}
+
+.eyebrow {
+margin: 0 0 0.5rem;
+color: var(--color-primary);
+font-size: 0.78rem;
+font-weight: 750;
+letter-spacing: 0.12em;
+line-height: 1.4;
+text-transform: uppercase;
+}
+
+.hero-note {
+margin: 0.9rem auto 0;
+color: var(--color-muted);
+font-size: 0.88rem;
+}
+
+.btn {
+background: var(--color-primary);
+}
+
+.btn:hover {
+background: var(--color-primary-dark);
+}
+
+.btn-secondary {
+color: var(--color-primary);
+border-color: var(--color-primary);
+}
+
+.section-band {
+background: #eef3e9;
+}
+
+.section-pad {
+padding-top: 4rem;
+padding-bottom: 4rem;
+}
+
+.section-heading {
+max-width: 660px;
+margin: 0 auto 2rem;
+text-align: center;
+}
+
+.section-heading h2,
+.booking-strip h2,
+.contact-panel h2,
+.online-note h2 {
+margin: 0 0 0.65rem;
+font-size: clamp(1.6rem, 3vw, 2.15rem);
+line-height: 1.2;
+letter-spacing: -0.025em;
+}
+
+.section-heading > p:last-child,
+.booking-strip > div > p:last-child,
+.contact-panel > div > p:last-child,
+.online-note > div > p:last-child {
+color: var(--color-muted);
+}
+
+.care-points {
+display: grid;
+grid-template-columns: repeat(3, minmax(0, 1fr));
+gap: 1.25rem;
+}
+
+.care-point {
+padding: 1.4rem 1.5rem;
+border-top: 2px solid #a7c6a2;
+}
+
+.care-number {
+display: inline-block;
+margin-bottom: 1.2rem;
+color: #72966e;
+font-size: 0.82rem;
+font-weight: 750;
+letter-spacing: 0.1em;
+}
+
+.care-point h3,
+.service-card h3,
+.service-card h2 {
+margin: 0 0 0.55rem;
+font-size: 1.12rem;
+line-height: 1.35;
+}
+
+.care-point p,
+.service-card p {
+margin: 0;
+color: var(--color-muted);
+}
+
+.service-grid {
+display: grid;
+grid-template-columns: repeat(2, minmax(0, 1fr));
+gap: 1rem;
+}
+
+.service-card {
+min-width: 0;
+padding: 1.5rem;
+background: #fff;
+border: 1px solid var(--color-border);
+border-radius: 14px;
+box-shadow: 0 5px 18px rgba(35, 79, 59, 0.045);
+}
+
+.service-icon {
+display: grid;
+width: 48px;
+height: 48px;
+place-items: center;
+margin-bottom: 1rem;
+border-radius: 14px;
+background: #edf4e9;
+color: var(--color-primary);
+}
+
+.service-icon svg {
+width: 29px;
+height: 29px;
+fill: none;
+stroke: currentColor;
+stroke-width: 1.8;
+stroke-linecap: round;
+stroke-linejoin: round;
+}
+
+.service-card-feature {
+grid-column: 1 / -1;
+display: grid;
+grid-template-columns: auto 1fr;
+align-items: start;
+gap: 1rem;
+background: #f1f4e9;
+}
+
+.service-card-feature .service-icon {
+margin: 0.15rem 0 0;
+}
+
+.service-card-feature .eyebrow {
+margin-bottom: 0.35rem;
+}
+
+.service-card-feature h3,
+.service-card-feature h2 {
+margin-bottom: 0.4rem;
+}
+
+.section-action {
+margin: 1.5rem 0 0;
+text-align: center;
+}
+
+.text-link {
+color: var(--color-primary-dark);
+font-weight: 700;
+text-decoration-thickness: 1px;
+text-underline-offset: 3px;
+}
+
+.booking-strip,
+.contact-panel {
+display: flex;
+align-items: center;
+justify-content: space-between;
+gap: 2rem;
+}
+
+.booking-strip > div,
+.contact-panel > div:first-child {
+max-width: 620px;
+}
+
+.booking-strip .btn,
+.contact-actions {
+flex: 0 0 auto;
+}
+
+.contact-panel {
+padding: 2rem;
+border: 1px solid var(--color-border);
+border-radius: 16px;
+background: #fff;
+}
+
+.contact-actions {
+display: flex;
+flex-direction: column;
+align-items: flex-start;
+gap: 0.85rem;
+}
+
+.page-intro {
+max-width: 760px;
+padding: 3.5rem 0 1.5rem;
+}
+
+.page-intro h1 {
+margin: 0 0 0.8rem;
+font-size: clamp(2rem, 4vw, 2.8rem);
+line-height: 1.15;
+letter-spacing: -0.03em;
+}
+
+.page-intro > p:last-child {
+max-width: 650px;
+margin: 0;
+color: var(--color-muted);
+font-size: 1.08rem;
+}
+
+.service-grid-page {
+padding-bottom: 2rem;
+}
+
+.service-grid-page .service-card {
+padding: 1.75rem;
+}
+
+.service-grid-page .service-card-feature {
+grid-template-columns: auto 1fr;
+}
+
+.online-note {
+display: flex;
+align-items: center;
+justify-content: space-between;
+gap: 2rem;
+margin: 1rem 0 2rem;
+padding: 2rem;
+border-radius: 16px;
+background: #edf4e9;
+}
+
+.online-note > div {
+max-width: 680px;
+}
+
+.online-note .btn {
+flex: 0 0 auto;
+}
+
+.care-disclaimer {
+margin: 0 0 3rem;
+color: var(--color-muted);
+font-size: 0.9rem;
+}
+
+.about-layout {
+display: grid;
+grid-template-columns: minmax(240px, 0.75fr) minmax(0, 1.5fr);
+align-items: start;
+gap: 1.25rem;
+padding-bottom: 4rem;
+}
+
+.about-highlight {
+padding: 1.75rem;
+border-radius: 16px;
+background: #edf4e9;
+}
+
+.credential-mark {
+display: grid;
+width: 64px;
+height: 64px;
+place-items: center;
+margin-bottom: 1.5rem;
+border: 1px solid #b8ceb1;
+border-radius: 50%;
+color: var(--color-primary);
+font-family: Georgia, serif;
+font-size: 1.5rem;
+}
+
+.about-highlight h2 {
+margin: 0 0 0.4rem;
+}
+
+.about-highlight p {
+color: var(--color-muted);
+}
+
+.about-highlight .experience-note {
+margin-bottom: 0;
+padding-top: 1rem;
+border-top: 1px solid #cfddc8;
+font-size: 0.94rem;
+}
+
+.about-copy h2 {
+margin-top: 0;
+font-size: 1.35rem;
+}
+
+.about-copy h2:not(:first-child) {
+margin-top: 1.8rem;
+}
+
+.lookup-layout {
+display: grid;
+grid-template-columns: minmax(0, 1.3fr) minmax(240px, 0.7fr);
+align-items: start;
+gap: 1.25rem;
+padding-bottom: 4rem;
+}
+
+.lookup-card form > .btn {
+margin-top: 1rem;
+}
+
+.help-card {
+padding: 1.5rem;
+border-left: 3px solid #a7c6a2;
+border-radius: 0 12px 12px 0;
+background: #eef3e9;
+}
+
+.help-card h2 {
+margin: 0 0 0.65rem;
+font-size: 1.25rem;
+}
+
+.help-card > p:not(.eyebrow) {
+color: var(--color-muted);
+}
+
+.small-note {
+font-size: 0.86rem;
+}
+
+.booking-page .page-intro {
+padding-bottom: 0;
+}
+
+.booking-submit-row {
+display: flex;
+align-items: center;
+gap: 1rem;
+margin-top: 1.25rem;
+}
+
+.booking-submit-row .btn {
+flex: 0 0 auto;
+}
+
+.booking-reassurance {
+max-width: 32rem;
+margin: 0;
+padding: 0.8rem 1rem;
+border-left: 3px solid #a7c6a2;
+border-radius: 0 10px 10px 0;
+background: #eef3e9;
+color: var(--color-text);
+font-size: 0.9rem;
+}
+
+.footer-inner {
+display: flex;
+align-items: center;
+justify-content: space-between;
+gap: 1rem;
+}
+
+.footer-inner p {
+margin: 0;
+}
+
+.footer-inner .facebook-link {
+flex: 0 0 auto;
+margin: 0;
+}
+
+main > .container > section:first-child:not(.page-intro) {
+padding-top: 2.5rem;
+}
+
+.card,
+.placeholder-note,
+.timezone-notice,
+.confirmation,
+.error-note {
+border-radius: 14px;
+}
+
+.card {
+box-shadow: 0 5px 18px rgba(35, 79, 59, 0.04);
+}
+
+@media (max-width: 850px) {
+
+.home-hero {
+grid-template-columns: 1fr;
+gap: 1.5rem;
+}
+
+.clinic-promo {
+width: min(100%, 800px);
+margin: 0 auto;
+}
+
+.hero-copy {
+max-width: 680px;
+margin: 0 auto;
+text-align: center;
+}
+
+.hero-copy h1 {
+margin-right: auto;
+margin-left: auto;
+}
+
+.hero-copy > p:not(.eyebrow):not(.hero-note) {
+margin-right: auto;
+margin-left: auto;
+}
+
+}
+
 /* ---------- Mobile ---------- */
 
 @media (max-width: 700px) {
@@ -362,12 +877,42 @@ flex-direction: column;
 gap: 0.75rem;
 }
 
+.site-brand img {
+width: min(280px, 78vw);
+}
+
 .site-nav {
 gap: 0.75rem;
 }
 
 .site-nav a {
 font-size: 0.9rem;
+}
+
+.home-hero {
+grid-template-columns: 1fr;
+gap: 1.5rem;
+}
+
+.clinic-promo {
+width: min(100%, 800px);
+margin: 0 auto;
+}
+
+.hero-copy {
+max-width: 680px;
+margin: 0 auto;
+text-align: center;
+}
+
+.hero-copy h1 {
+margin-right: auto;
+margin-left: auto;
+}
+
+.hero-copy > p:not(.eyebrow):not(.hero-note) {
+margin-right: auto;
+margin-left: auto;
 }
 
 .hero {
@@ -380,6 +925,65 @@ font-size: 1.75rem;
 
 .timezone-notice {
 padding: 0.9rem 1rem;
+}
+
+.home-hero {
+padding-top: 1.25rem;
+padding-bottom: 2rem;
+}
+
+.clinic-promo {
+margin-bottom: 1.35rem;
+}
+
+.care-points,
+.service-grid {
+grid-template-columns: 1fr;
+}
+
+.service-card-feature {
+grid-column: auto;
+}
+
+.section-pad {
+padding-top: 2.75rem;
+padding-bottom: 2.75rem;
+}
+
+.booking-strip,
+.contact-panel,
+.online-note {
+align-items: flex-start;
+flex-direction: column;
+gap: 1rem;
+}
+
+.booking-submit-row {
+align-items: stretch;
+flex-direction: column;
+}
+
+.booking-submit-row .btn {
+align-self: flex-start;
+}
+
+.contact-panel,
+.online-note {
+padding: 1.4rem;
+}
+
+.about-layout {
+grid-template-columns: 1fr;
+padding-bottom: 2.5rem;
+}
+
+.lookup-layout {
+grid-template-columns: 1fr;
+padding-bottom: 2.5rem;
+}
+
+.footer-inner {
+flex-direction: column;
 }
 
 }

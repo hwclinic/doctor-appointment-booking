@@ -7,6 +7,7 @@
 import { jsonResponse } from "../cors.js";
 import { generateBookingReference } from "../reference.js";
 import { createZoomMeeting } from "../zoom.js";
+import { sendBookingConfirmation } from "../email.js";
 
 // Shared across BOTH cancellation and "view my booking" lookups, because
 // both accept only a booking reference and are equally guessable — an
@@ -83,12 +84,19 @@ export async function createBooking(request, env) {
   if (!body) return jsonResponse({ error: "Invalid request." }, env, 400);
 
   const { date, time, patientName, patientPhone, consultationType } = body;
+  if (body.patientEmail != null && typeof body.patientEmail !== "string") {
+    return jsonResponse({ error: "Please enter a valid email address." }, env, 400);
+  }
+  const patientEmail = typeof body.patientEmail === "string" ? body.patientEmail.trim() : "";
 
   if (!date || !time || !patientName?.trim() || !patientPhone?.trim()) {
     return jsonResponse({ error: "Date, time, name and phone number are all required." }, env, 400);
   }
   if (!["online", "in_person"].includes(consultationType)) {
     return jsonResponse({ error: "Please choose a consultation type." }, env, 400);
+  }
+  if (patientEmail && (patientEmail.length > 254 || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(patientEmail))) {
+    return jsonResponse({ error: "Please enter a valid email address." }, env, 400);
   }
 
   // Server-side re-check: in-person must currently be enabled by the clinic.
@@ -139,7 +147,17 @@ export async function createBooking(request, env) {
     }
   }
 
-  return jsonResponse({ referenceNumber: reference, date, time, consultationType, zoomJoinUrl }, env);
+  const emailSent = patientEmail
+    ? await sendBookingConfirmation(env, patientEmail, {
+        reference,
+        date,
+        time,
+        consultationType,
+        zoomJoinUrl,
+      })
+    : null;
+
+  return jsonResponse({ referenceNumber: reference, date, time, consultationType, zoomJoinUrl, emailSent }, env);
 }
 
 /** POST /api/cancel — the ONLY input is the booking reference (by design). */

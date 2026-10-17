@@ -82,6 +82,34 @@ dashboard at `admin/index.html`.
    If using a custom hostname, update `js/config.js` to match it and
    deploy the website again.
 
+## Optional: free appointment confirmation email
+
+Resend's free transactional-email tier currently includes up to 3,000
+emails per month (100 per day). Sending from the clinic's domain requires
+verifying the sending domain first; GoDaddy email hosting is not required.
+
+1. Create a free account at [Resend](https://resend.com/) and add the
+   subdomain `updates.hwc-co.in` under **Domains**.
+2. In GoDaddy DNS for `hwc-co.in`, add the DNS records Resend displays
+   for that subdomain. Copy each record's type, name, and value exactly;
+   don't replace the website A records or existing mail/DMARC records.
+   Wait until Resend marks the domain verified.
+3. Create a Resend API key with permission to send email.
+4. Store the key as a Cloudflare Worker secret (never in this repository):
+   ```powershell
+   npx wrangler secret put RESEND_API_KEY
+   ```
+5. Deploy the Worker and website after confirming the Cloudflare build
+   settings preserve the existing admin secrets. Confirmation messages
+   will come from `appointments@updates.hwc-co.in`.
+
+The API sends a short plain-text message with the reference, appointment
+date and time in IST, consultation type, and Zoom link when available.
+Resend processes the recipient address and message to deliver it; the
+Worker does not save the patient's email address in D1. If sending fails,
+the booking remains confirmed and the patient is told to save the on-screen
+reference. Email remains optional.
+
 For the GitHub Pages website, use the four apex A records and `www` CNAME
 documented in the main README. The domain currently uses GoDaddy
 nameservers, so add these records at GoDaddy and preserve existing

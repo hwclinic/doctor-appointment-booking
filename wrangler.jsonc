@@ -11,7 +11,8 @@
     }
   ],
   "vars": {
-    "ALLOWED_ORIGIN": "https://hwc-co.in"
+    "ALLOWED_ORIGIN": "https://hwc-co.in",
+    "EMAIL_FROM": "Dr. Revathy's Clinic <appointments@updates.hwc-co.in>"
   },
   "observability": {
     "enabled": true

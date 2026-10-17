@@ -1,121 +1,75 @@
-<!DOCTYPE html> <html lang="en"> <head> <meta charset="UTF-8" /> <meta name="viewport" content="width=device-width, initial-scale=1.0" /> <title>View My Booking — Dr. Revathy</title> <link rel="stylesheet" href="css/styles.css" /> </head> <body> <header class="site-header"> <div class="container"> <a class="site-title" href="index.html">Dr. Revathy, Homoeopathic Wellness Clinic</a>
-  <nav class="site-nav">
-    <a href="index.html">Home</a>
-    <a href="about.html">About</a>
-    <a href="services.html">Services</a>
-    <a href="book.html">Book Appointment</a>
-    <a href="view-booking.html" aria-current="page">View My Booking</a>
-    <a href="cancel.html">Cancel Appointment</a>
-  </nav>
-</div>
-
-</header> <main class="container"> <section> <h1>View My Booking</h1>
-  <p>
-    Need to check your appointment details or find your online
-    consultation link? Enter your booking reference below.
-  </p>
-
-  <div class="placeholder-note">
-    <strong>Your booking reference</strong>
-
-    <p>
-      Your reference will look something like
-      <code>APT-7F3K2Q</code>.
-    </p>
-
-    <p>
-      For privacy and security, we use the booking reference to locate
-      your appointment rather than your name or phone number.
-    </p>
-  </div>
-
-  <div class="card">
-    <form id="view-booking-form">
-
-      <label for="reference-input">
-        Booking reference number
-      </label>
-
-      <input
-        type="text"
-        id="reference-input"
-        name="reference"
-        placeholder="e.g. APT-7F3K2Q"
-        autocomplete="off"
-        required
-      />
-
-      <div
-        id="view-booking-error"
-        class="error-note"
-        style="display:none;"
-      ></div>
-
-      <p style="margin-top:1rem;">
-        <button
-          type="submit"
-          id="view-booking-btn"
-          class="btn"
-        >
-          View My Booking
-        </button>
-      </p>
-
-    </form>
-
-    <div
-      id="view-booking-result"
-      class="confirmation"
-      style="display:none;"
-    ></div>
-  </div>
-
-  <div class="card" style="margin-top:1.5rem;">
-    <h2>Online Consultations</h2>
-
-    <p>
-      If your appointment is an online consultation, your video
-      consultation link will be displayed here when it is available.
-    </p>
-
-    <p>
-      You can use your booking reference to return to this page and
-      retrieve your appointment details whenever needed.
-    </p>
-  </div>
-
-  <div class="card" style="margin-top:1.5rem;">
-    <h2>Need Help?</h2>
-
-    <p>
-      If you have misplaced your booking reference or have trouble
-      accessing your appointment details, please contact the clinic.
-    </p>
-
-    <p>
-      <strong>Email:</strong>
-      <a href="mailto:hwc.drrevathy@gmail.com">
-        hwc.drrevathy@gmail.com
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Look up your appointment details and online consultation link using your booking reference." />
+  <title>View My Booking — Dr. Revathy</title>
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <a class="site-brand" href="index.html" aria-label="Dr. Revathy, Homoeopathic Wellness Clinic — Home">
+        <img src="assets/clinic-brand.png" alt="Dr. Revathy, Homoeopathic Wellness Clinic" />
       </a>
-    </p>
-  </div>
+      <nav class="site-nav" aria-label="Main navigation">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="services.html">Services</a>
+        <a href="book.html">Book Appointment</a>
+        <a href="view-booking.html" aria-current="page">View My Booking</a>
+        <a href="cancel.html">Cancel Appointment</a>
+      </nav>
+    </div>
+  </header>
 
-</section>
+  <main class="container">
+    <section class="page-intro">
+      <p class="eyebrow">Your appointment details</p>
+      <h1>View your booking</h1>
+      <p>Enter the reference you received after booking to check your appointment and find your video link when available.</p>
+    </section>
 
-</main> <footer class="site-footer"> <div class="container"> <footer class="site-footer"> <div class="container">
-<p>
-  &copy; 2026 Homoeopathic Wellness Clinic
-</p>
+    <section class="lookup-layout">
+      <div class="card lookup-card">
+        <form id="view-booking-form">
+          <label for="reference-input">Booking reference</label>
+          <input
+            type="text"
+            id="reference-input"
+            name="reference"
+            placeholder="e.g. APT-7F3K2Q"
+            autocomplete="off"
+            aria-describedby="reference-help"
+            required
+          />
+          <p id="reference-help" class="consult-note">
+            Your reference looks like <code>APT-7F3K2Q</code>. We use it
+            instead of asking for your name or phone number.
+          </p>
+          <div id="view-booking-error" class="error-note" style="display:none;" role="alert"></div>
+          <button type="submit" id="view-booking-btn" class="btn">Find my booking</button>
+        </form>
+        <div id="view-booking-result" class="confirmation" style="display:none;" aria-live="polite"></div>
+      </div>
+      <aside class="help-card">
+        <p class="eyebrow">Need a hand?</p>
+        <h2>We’re here to help</h2>
+        <p>If you’ve misplaced your reference or have trouble looking up your appointment, email the clinic.</p>
+        <a class="text-link" href="mailto:hwc.drrevathy@gmail.com">hwc.drrevathy@gmail.com</a>
+        <p class="small-note">Please don’t email sensitive medical information.</p>
+      </aside>
+    </section>
+  </main>
 
-<a
-  class="facebook-link"
-  href="https://www.facebook.com/people/Homoeopathic-Wellness-Clinic/100057610862098/?rdid=MGpBjhCgXXUhOLza&share_url=https%3A%2F%2Fwww.facebook.com%2Fshare%2F19XT5n5m8X%2F"
-  target="_blank"
-  rel="noopener noreferrer"
-  aria-label="Visit Homoeopathic Wellness Clinic on Facebook"
-  title="Homoeopathic Wellness Clinic on Facebook"
->
-  <span aria-hidden="true">f</span>
-</a>
-
-</div> </footer> </div> </footer> <script src="js/config.js"></script> <script src="js/view-booking.js"></script> </body> </html>
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p>&copy; 2026 Dr. Revathy’s Homoeopathic Wellness Clinic</p>
+      <a class="facebook-link" href="https://www.facebook.com/people/Homoeopathic-Wellness-Clinic/100057610862098/?rdid=MGpBjhCgXXUhOLza&share_url=https%3A%2F%2Fwww.facebook.com%2Fshare%2F19XT5n5m8X%2F" target="_blank" rel="noopener noreferrer" aria-label="Visit Homoeopathic Wellness Clinic on Facebook" title="Homoeopathic Wellness Clinic on Facebook"><span aria-hidden="true">f</span></a>
+    </div>
+  </footer>
+  <script src="js/config.js"></script>
+  <script src="js/view-booking.js"></script>
+</body>
+</html>

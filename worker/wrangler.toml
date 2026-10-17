@@ -21,3 +21,4 @@ database_id = "d5bb6d56-f46b-444f-8573-b5ee01504b0f"
 # The exact production website origin allowed to call this API.
 [vars]
 ALLOWED_ORIGIN = "https://hwc-co.in"
+EMAIL_FROM = "Dr. Revathy's Clinic <appointments@updates.hwc-co.in>"

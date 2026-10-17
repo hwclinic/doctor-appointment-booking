@@ -173,12 +173,18 @@ async function handleFormSubmit(event) {
            <p>Save this link — you can also find it later using "View My Booking" and your reference number.</p>`
         : `<p>Your online consultation link will be shared with you separately before your appointment.</p>`;
     }
+    const emailMessage = email
+      ? result.emailSent
+        ? "<p>A confirmation email has been sent to the address you provided.</p>"
+        : "<p>Your appointment is confirmed, but we couldn't send the email. Please save your booking reference and check the email address.</p>"
+      : "";
     confirmation.innerHTML = `
       <h3>Booking Confirmed</h3>
       <p><strong>Date:</strong> ${result.date}</p>
       <p><strong>Time:</strong> ${result.time}</p>
       <p><strong>Reference Number:</strong> ${result.referenceNumber}</p>
       ${zoomSection}
+      ${emailMessage}
       <p>Please save this reference number — you'll need it if you want to cancel or view your booking again.</p>
     `;
     confirmation.style.display = "block";
