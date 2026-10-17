@@ -1,0 +1,19 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "doctor-appointment-booking-api",
+  "main": "worker/src/index.js",
+  "compatibility_date": "2024-09-23",
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "doctor_appointments",
+      "database_id": "d5bb6d56-f46b-444f-8573-b5ee01504b0f"
+    }
+  ],
+  "vars": {
+    "ALLOWED_ORIGIN": "https://hwc-co.in"
+  },
+  "observability": {
+    "enabled": true
+  }
+}
