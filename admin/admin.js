@@ -235,6 +235,52 @@ async function handleLogout() {
   window.location.href = "index.html";
 }
 
+async function handleChangePassword(event) {
+  event.preventDefault();
+  const message = document.getElementById("password-message");
+  const submitButton = event.currentTarget.querySelector('button[type="submit"]');
+  const currentPassword = document.getElementById("current-password").value;
+  const newPassword = document.getElementById("new-password").value;
+  const confirmPassword = document.getElementById("confirm-password").value;
+  message.className = "placeholder-note";
+  message.style.display = "none";
+
+  if (newPassword !== confirmPassword) {
+    message.textContent = "The new passwords do not match.";
+    message.classList.add("error-note");
+    message.style.display = "block";
+    return;
+  }
+
+  submitButton.disabled = true;
+  submitButton.textContent = "Updating...";
+  try {
+    const response = await fetch(`${API_BASE_URL}/api/admin/change-password`, {
+      method: "POST",
+      credentials: "include",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ currentPassword, newPassword }),
+    });
+    const result = await response.json();
+    message.textContent = response.ok ? "Password updated successfully." : (result.error || "Could not update password.");
+    if (!response.ok) message.classList.add("error-note");
+    message.style.display = "block";
+
+    if (response.ok) {
+      event.currentTarget.reset();
+    } else if (response.status === 401) {
+      window.location.href = "index.html";
+    }
+  } catch (error) {
+    message.textContent = "Could not reach the server. Your password was not changed.";
+    message.classList.add("error-note");
+    message.style.display = "block";
+  } finally {
+    submitButton.disabled = false;
+    submitButton.textContent = "Update Password";
+  }
+}
+
 document.addEventListener("DOMContentLoaded", () => {
   const loginForm = document.getElementById("login-form");
   if (loginForm) {
@@ -250,5 +296,6 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("block-day-form").addEventListener("submit", handleBlockDay);
     document.getElementById("in-person-toggle").addEventListener("change", handleInPersonToggle);
     document.getElementById("logout-btn").addEventListener("click", handleLogout);
+    document.getElementById("change-password-form").addEventListener("submit", handleChangePassword);
   }
 });

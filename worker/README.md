@@ -82,6 +82,22 @@ dashboard at `admin/index.html`.
    If using a custom hostname, update `js/config.js` to match it and
    deploy the website again.
 
+### Changing the production admin password
+
+After signing in at `https://hwc-co.in/admin/`, use the **Change Password**
+form on the dashboard. Enter the current password and a new password of at
+least 12 characters. The Worker verifies the current password and stores a
+new salted password hash in D1; the plaintext password is never stored.
+Until the first dashboard password change, the Worker continues to use the
+configured `ADMIN_PASSWORD_SALT` and `ADMIN_PASSWORD_HASH` secrets.
+
+For a new database, `schema.sql` creates the credentials table. For an
+existing production database, apply the additive migration before deploying:
+
+```powershell
+npx wrangler d1 execute doctor_appointments --remote --file=./migrations/0002_admin_credentials.sql --config wrangler.toml
+```
+
 ## Optional: free appointment confirmation email
 
 Resend's free transactional-email tier currently includes up to 3,000

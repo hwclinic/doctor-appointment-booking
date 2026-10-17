@@ -154,6 +154,7 @@ color: #fff;
 }
 
 .site-header .btn-secondary {
+background: transparent;
 color: #fff;
 border-color: #fff;
 }
@@ -468,6 +469,7 @@ background: var(--color-primary-dark);
 }
 
 .btn-secondary {
+background: #fff;
 color: var(--color-primary);
 border-color: var(--color-primary);
 }

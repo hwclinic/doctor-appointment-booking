@@ -37,6 +37,15 @@ CREATE TABLE IF NOT EXISTS clinic_settings (
 
 INSERT OR IGNORE INTO clinic_settings (key, value) VALUES ('in_person_enabled', 'false');
 
+-- The admin password is initially supplied through Worker secrets. When the
+-- doctor changes it from the dashboard, the new salt and hash are stored here.
+CREATE TABLE IF NOT EXISTS admin_credentials (
+  id TEXT PRIMARY KEY CHECK (id = 'admin'),
+  password_salt TEXT NOT NULL,
+  password_hash TEXT NOT NULL,
+  updated_at TEXT NOT NULL DEFAULT (datetime('now'))
+);
+
 -- Recurring weekly availability template. The doctor edits this from the
 -- admin screen (e.g. "Mon-Fri, 13:30-16:30, 30-minute slots"), and the
 -- "generate slots" action expands it into real bookable rows in the

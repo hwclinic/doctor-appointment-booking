@@ -60,6 +60,10 @@ export default {
         return adminRoutes.login(request, env);
       }
 
+      if (pathname === "/api/admin/change-password" && method === "POST") {
+        return adminRoutes.changePassword(request, env);
+      }
+
       if (pathname === "/api/admin/logout" && method === "POST") {
         return adminRoutes.logout(env);
       }

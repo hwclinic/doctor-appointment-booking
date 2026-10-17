@@ -39,6 +39,10 @@ function fromHex(hex) {
   return bytes;
 }
 
+function toHexBytes(bytes) {
+  return [...bytes].map((byte) => byte.toString(16).padStart(2, "0")).join("");
+}
+
 /** Verify a submitted password against the stored PBKDF2 hash + salt. */
 export async function verifyPassword(password, saltHex, expectedHashHex, iterations = 100000) {
   const salt = fromHex(saltHex);
@@ -50,6 +54,19 @@ export async function verifyPassword(password, saltHex, expectedHashHex, iterati
   );
   const derivedHex = toHex(derivedBits);
   return derivedHex === expectedHashHex;
+}
+
+/** Generate a fresh salt and PBKDF2 hash for a newly chosen password. */
+export async function hashPassword(password) {
+  const salt = crypto.getRandomValues(new Uint8Array(16));
+  const saltHex = toHexBytes(salt);
+  const keyMaterial = await crypto.subtle.importKey("raw", encoder.encode(password), "PBKDF2", false, ["deriveBits"]);
+  const derivedBits = await crypto.subtle.deriveBits(
+    { name: "PBKDF2", salt, iterations: 100000, hash: "SHA-256" },
+    keyMaterial,
+    256
+  );
+  return { salt: saltHex, hash: toHex(derivedBits) };
 }
 
 /** Create a signed session token: "<expiryTimestamp>.<hmacSignature>" */

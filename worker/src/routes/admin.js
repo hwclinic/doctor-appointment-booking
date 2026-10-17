@@ -4,7 +4,7 @@
    ========================================================================== */
 
 import { jsonResponse, corsHeaders } from "../cors.js";
-import { verifyPassword, createSessionToken, verifySessionToken, getSessionCookie } from "../auth.js";
+import { verifyPassword, hashPassword, createSessionToken, verifySessionToken, getSessionCookie } from "../auth.js";
 
 /** Shared guard: returns true if the request has a valid admin session. */
 async function isAuthenticated(request, env) {
@@ -24,6 +24,16 @@ function sessionCookieHeader(token, env) {
   return `session=${token}; HttpOnly; ${secureFlag}SameSite=${sameSite}; Path=/; Max-Age=28800`;
 }
 
+async function getAdminPassword(env) {
+  const storedPassword = await env.DB.prepare(
+    "SELECT password_salt, password_hash FROM admin_credentials WHERE id = 'admin'"
+  ).first();
+  return storedPassword || {
+    password_salt: env.ADMIN_PASSWORD_SALT,
+    password_hash: env.ADMIN_PASSWORD_HASH,
+  };
+}
+
 /** POST /api/admin/login */
 export async function login(request, env) {
   const body = await request.json().catch(() => null);
@@ -37,11 +47,56 @@ export async function login(request, env) {
   // Constant-shape check: always attempt verification (even on username
   // mismatch) so response timing doesn't reveal whether the username exists.
   const usernameMatches = username === env.ADMIN_USERNAME;
-  const passwordMatches = await verifyPassword(password, env.ADMIN_PASSWORD_SALT, env.ADMIN_PASSWORD_HASH);
+  const credentials = await getAdminPassword(env);
+  const passwordMatches = await verifyPassword(password, credentials.password_salt, credentials.password_hash);
 
   if (!usernameMatches || !passwordMatches) {
     return jsonResponse({ error: "Invalid username or password." }, env, 401);
   }
+
+  const token = await createSessionToken(env.SESSION_SECRET);
+  return new Response(JSON.stringify({ success: true }), {
+    status: 200,
+    headers: {
+      "Content-Type": "application/json",
+      "Set-Cookie": sessionCookieHeader(token, env),
+      ...corsHeaders(env),
+    },
+  });
+}
+
+/** POST /api/admin/change-password */
+export async function changePassword(request, env) {
+  if (!(await isAuthenticated(request, env))) {
+    return jsonResponse({ error: "Please log in again before changing your password." }, env, 401);
+  }
+
+  const body = await request.json().catch(() => null);
+  const { currentPassword, newPassword } = body || {};
+  if (typeof currentPassword !== "string" || typeof newPassword !== "string") {
+    return jsonResponse({ error: "Enter your current password and a new password." }, env, 400);
+  }
+  if (newPassword.length < 12 || newPassword.length > 128) {
+    return jsonResponse({ error: "Your new password must be between 12 and 128 characters." }, env, 400);
+  }
+
+  const credentials = await getAdminPassword(env);
+  if (!(await verifyPassword(currentPassword, credentials.password_salt, credentials.password_hash))) {
+    return jsonResponse({ error: "Your current password is incorrect." }, env, 400);
+  }
+  if (await verifyPassword(newPassword, credentials.password_salt, credentials.password_hash)) {
+    return jsonResponse({ error: "Choose a new password different from your current password." }, env, 400);
+  }
+
+  const updatedCredentials = await hashPassword(newPassword);
+  await env.DB.prepare(
+    `INSERT INTO admin_credentials (id, password_salt, password_hash, updated_at)
+     VALUES ('admin', ?, ?, datetime('now'))
+     ON CONFLICT(id) DO UPDATE SET
+       password_salt = excluded.password_salt,
+       password_hash = excluded.password_hash,
+       updated_at = excluded.updated_at`
+  ).bind(updatedCredentials.salt, updatedCredentials.hash).run();
 
   const token = await createSessionToken(env.SESSION_SECRET);
   return new Response(JSON.stringify({ success: true }), {
