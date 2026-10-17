@@ -18,8 +18,6 @@ binding = "DB"
 database_name = "doctor_appointments"
 database_id = "d5bb6d56-f46b-444f-8573-b5ee01504b0f"
 
-# The exact origin (website address) allowed to call this API.
-# During local development this is the Live Server address; after you
-# deploy to GitHub Pages, change it to your real https://...github.io URL.
+# The exact production website origin allowed to call this API.
 [vars]
-ALLOWED_ORIGIN = "https://hwclinic.github.io"
+ALLOWED_ORIGIN = "https://hwc-co.in"

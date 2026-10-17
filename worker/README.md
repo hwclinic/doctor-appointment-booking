@@ -37,6 +37,13 @@ node generate-admin-password.js "YourChosenPassword"
 npm run dev
 ```
 
+Before starting the Worker, add this line to the ignored `worker/.dev.vars`
+file so local browser requests are allowed:
+
+```text
+ALLOWED_ORIGIN=http://127.0.0.1:5500
+```
+
 This starts the API at `http://127.0.0.1:8787`. The default local admin
 login (test only!) is:
 
@@ -44,26 +51,41 @@ login (test only!) is:
 - Password: `TestAdmin123!`
 
 Open the website's `index.html` with VS Code's "Live Server" (so it runs
-on `http://127.0.0.1:5500`, matching `ALLOWED_ORIGIN` in `wrangler.toml`)
-and try booking, cancelling, and the admin dashboard at
-`admin/index.html`.
+on `http://127.0.0.1:5500`) and try booking, cancelling, and the admin
+dashboard at `admin/index.html`.
 
-## Deploying for real (when you're ready — separate step, needs a free Cloudflare account)
+## Production deployment (requires your Cloudflare account)
 
 1. `npx wrangler login` — opens a browser to connect your free Cloudflare account.
-2. `npx wrangler d1 create doctor_appointments` — creates your real (still empty) database and prints a `database_id`. Paste that into `wrangler.toml`.
-3. `npm run db:init:remote` — creates the tables on your real database (still fake/test data at first — never load real patient data here without a separate security review).
-4. Set your real secrets (never put these in a file):
+2. Confirm `wrangler.toml` points at the intended D1 database. Do not create
+   another database or rerun the schema against a database that already has
+   tables; the schema includes sample/default schedule rows.
+3. Set the production secrets (never put these in a file). Use a unique,
+   strong password that is not the local test password:
    ```powershell
    npx wrangler secret put ADMIN_USERNAME
    npx wrangler secret put ADMIN_PASSWORD_SALT
    npx wrangler secret put ADMIN_PASSWORD_HASH
    npx wrangler secret put SESSION_SECRET
    ```
-   Generate the salt/hash with `node generate-admin-password.js "YourRealPassword"` — pick a strong password only you know.
-5. Update `wrangler.toml`'s `ALLOWED_ORIGIN` to your real GitHub Pages URL (e.g. `https://YOUR-USERNAME.github.io`).
-6. `npm run deploy` — this prints your live Worker URL, e.g. `https://doctor-appointment-booking-api.YOUR-SUBDOMAIN.workers.dev`.
-7. Update `js/config.js` in the website with that URL as `API_BASE_URL`.
+   Generate the salt/hash locally with
+   `node generate-admin-password.js "YourChosenPassword"` and use the
+   printed values for the salt and hash. Do not send your password or
+   generated secrets in chat or commit them.
+4. `wrangler.toml` allows the production website origin `https://hwc-co.in`.
+5. Deploy with `npm run deploy` and confirm that `/api/settings` responds
+   from the Worker.
+6. The website currently uses the Worker `workers.dev` URL in
+   `js/config.js`. A custom hostname such as `api.hwc-co.in` can be added
+   later in Cloudflare **Workers & Pages → doctor-appointment-booking-api
+   → Settings → Domains & Routes**, after the Cloudflare zone is active.
+   If using a custom hostname, update `js/config.js` to match it and
+   deploy the website again.
+
+For the GitHub Pages website, use the four apex A records and `www` CNAME
+documented in the main README. The domain currently uses GoDaddy
+nameservers, so add these records at GoDaddy and preserve existing
+mail-provider DNS records.
 
 ## Optional: enabling Zoom video links for online consultations
 

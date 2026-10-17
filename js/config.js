@@ -1,11 +1,11 @@
 /* ==========================================================================
    Front-end configuration.
    Beginner note: this is the ONE place that knows where our backend API
-   lives. During local development it points at your local Worker
-   (wrangler dev). After you deploy the Worker to Cloudflare, change this
-   single value to your real Worker URL (e.g.
-   "https://doctor-appointment-booking-api.YOUR-SUBDOMAIN.workers.dev").
-   Nothing else in the front-end needs to change.
+   lives. In production the Worker uses its workers.dev hostname until a
+   custom API hostname is connected in Cloudflare.
    ========================================================================== */
 
-const API_BASE_URL = "https://doctor-appointment-booking-api.hwclinic.workers.dev";
+const isLocal = ["localhost", "127.0.0.1"].includes(window.location.hostname);
+const API_BASE_URL = isLocal
+  ? "http://127.0.0.1:8787"
+  : "https://doctor-appointment-booking-api.hwclinic.workers.dev";

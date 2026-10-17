@@ -34,23 +34,52 @@ What exists right now:
 PUBLIC INTERNET
       |
       v
-GitHub Pages (this website: index.html, book.html, admin/, ...)
+GitHub Pages (hwc-co.in: index.html, book.html, admin/, ...)
       |
       v
-Cloudflare Worker (worker/src/index.js) -- the API, the only thing
+Cloudflare Worker (workers.dev hostname) -- the API, the only thing
       |                                    allowed to touch the database
       v
 Cloudflare D1 (private database, "worker/schema.sql")
 ```
 
-- **GitHub Pages**: free static website hosting, URL like
-  `https://YOUR-USERNAME.github.io/doctor-appointment-booking/`.
+- **GitHub Pages**: static website hosting at
+  `https://hwc-co.in` (the GitHub Pages project will be configured with this
+  custom domain).
 - **Cloudflare Workers**: free backend/API layer. 100,000 requests/day
   free, no credit card required.
 - **Cloudflare D1**: free database. 5 GB storage, 5M reads/100K writes
   per day free, no credit card required.
 
 All of these services are free for this scale of use.
+
+## Connecting the custom domain
+
+The public website is hosted on GitHub Pages, not GoDaddy Website Builder
+or AiroApp. The domain currently uses GoDaddy nameservers, so add these
+records in GoDaddy DNS:
+
+| Type | Name | Value |
+|---|---|---|
+| A | @ | 185.199.108.153 |
+| A | @ | 185.199.109.153 |
+| A | @ | 185.199.110.153 |
+| A | @ | 185.199.111.153 |
+| CNAME | www | hwc-co.in |
+
+The apex A record currently points to a parked page; replace it with all
+four GitHub Pages A records above. Keep the GoDaddy nameservers and
+existing mail records. The domain owner must complete GoDaddy's WHOIS
+verification before the domain and HTTPS certificate can fully activate.
+After the DNS records resolve, enable **Enforce HTTPS** in GitHub Pages.
+The doctor login will be at `https://hwc-co.in/admin/`.
+
+The Worker API temporarily uses its `workers.dev` hostname. The website
+and API are on different sites, so browser third-party-cookie restrictions
+may affect admin login. A same-site API hostname such as `api.hwc-co.in`
+requires a Cloudflare zone active on Cloudflare DNS and a custom domain
+attached to the Worker; configure that after domain verification if login
+is blocked by the browser.
 
 ## Technologies used
 
