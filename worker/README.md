@@ -117,9 +117,10 @@ mail-provider DNS records.
 
 ## Optional: enabling Zoom video links for online consultations
 
-Online bookings work fine without this — patients just see "your link
-will be shared separately." To have the site automatically create a
-unique Zoom meeting for every online booking:
+Online bookings can still be made without this, but no Zoom link will be
+created automatically; the clinic must contact the patient to arrange the
+online consultation. To have the site create a unique Zoom meeting for
+every online booking:
 
 1. Go to [Zoom App Marketplace](https://marketplace.zoom.us/) → **Develop** → **Build App** → choose **Server-to-Server OAuth**. This app type needs no per-patient or per-doctor login consent — you (the account owner) authorize it once.
 2. Add the `meeting:write:meeting:admin` (or equivalent "Create a meeting") scope.
@@ -131,7 +132,7 @@ unique Zoom meeting for every online booking:
    npx wrangler secret put ZOOM_CLIENT_SECRET
    ```
    For local testing, add the same three as plain lines in `.dev.vars` instead (already gitignored).
-5. That's it — `worker/src/zoom.js` automatically starts creating meetings once all three values are present. If anything about Zoom fails, the booking still succeeds; only the video link is missing.
+5. That's it — `worker/src/zoom.js` automatically starts creating meetings once all three values are present. If anything about Zoom fails, the booking still succeeds, but the patient must be contacted to arrange the online consultation.
 
 ## What's stored, and what isn't
 

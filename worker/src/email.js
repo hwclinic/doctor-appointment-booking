@@ -29,7 +29,7 @@ export async function sendBookingConfirmation(env, recipient, appointment) {
   const zoomLine = appointment.zoomJoinUrl
     ? `\nZoom link: ${appointment.zoomJoinUrl}`
     : appointment.consultationType === "online"
-      ? "\nYour Zoom link will be shared separately."
+      ? "\nA Zoom link was not available when this booking was made. Please contact the clinic before your appointment to arrange your online consultation."
       : "";
   const text = [
     "Hello,",

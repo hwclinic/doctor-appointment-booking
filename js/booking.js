@@ -171,12 +171,12 @@ async function handleFormSubmit(event) {
       zoomSection = result.zoomJoinUrl
         ? `<p><strong>Video Link:</strong> <a href="${result.zoomJoinUrl}" target="_blank" rel="noopener">${result.zoomJoinUrl}</a></p>
            <p>Save this link — you can also find it later using "View My Booking" and your reference number.</p>`
-        : `<p>Your online consultation link will be shared with you separately before your appointment.</p>`;
+        : `<p><strong>Zoom link:</strong> Not available yet. Please contact the clinic before your appointment to arrange your online consultation.</p>`;
     }
     const emailMessage = email
       ? result.emailSent
         ? "<p>A confirmation email has been sent to the address you provided.</p>"
-        : "<p>Your appointment is confirmed, but we couldn't send the email. Please save your booking reference and check the email address.</p>"
+        : "<p>Email confirmation wasn't sent. Please save the appointment details below and use your reference number to view or cancel your booking.</p>"
       : "";
     confirmation.innerHTML = `
       <h3>Booking Confirmed</h3>
@@ -185,7 +185,7 @@ async function handleFormSubmit(event) {
       <p><strong>Reference Number:</strong> ${result.referenceNumber}</p>
       ${zoomSection}
       ${emailMessage}
-      <p>Please save this reference number — you'll need it if you want to cancel or view your booking again.</p>
+      <p><strong>Please save these appointment details</strong> — the date, time, and reference number. You'll need the reference number to view or cancel your booking.</p>
     `;
     confirmation.style.display = "block";
     document.getElementById("booking-form").style.display = "none";

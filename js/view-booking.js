@@ -48,7 +48,7 @@ document.addEventListener("DOMContentLoaded", () => {
       if (result.consultationType === "online") {
         zoomLine = result.zoomJoinUrl
           ? `<p><strong>Video Link:</strong> <a href="${result.zoomJoinUrl}" target="_blank" rel="noopener">${result.zoomJoinUrl}</a></p>`
-          : `<p>Your online consultation link will be shared with you separately before your appointment.</p>`;
+          : `<p><strong>Zoom link:</strong> Not available yet. Please contact the clinic before your appointment to arrange your online consultation.</p>`;
       }
 
       resultBox.innerHTML = `
